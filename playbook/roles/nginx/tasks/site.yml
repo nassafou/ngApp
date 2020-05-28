@@ -1,0 +1,32 @@
+---
+- name: "dossier"
+  become: yes
+  file:
+    path: /home/{{ user }}/{{ item }}
+    owner: "{{ user }}"
+    state: directory
+
+
+- name: "create a symbolic link"
+  become: yes
+  file:
+    src: /home/{{ user }}/{{ item }}
+    dest: /var/www/{{ item }}
+    state: link
+
+      
+- name: "ajouter un site disponible"
+  become: yes
+  template:
+    src: templates/server.j2
+    dest: /etc/nginx/sites-available/{{ item }}
+
+- name: "Activation du iteme"
+  become: yes
+  file:
+    src: /etc/nginx/sites-available/{{ item }}
+    dest: /etc/nginx/sites-enabled/{{ item }} 
+    state: link
+  notify: nginx reload
+  
+

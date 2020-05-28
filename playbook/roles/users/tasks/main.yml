@@ -1,0 +1,22 @@
+---
+# tasks file for playbook/roles/users
+- name: "create user"
+  when: user is defined
+  become: yes
+  user:
+    name: "{{ user }}"
+    comment: "John {{ user }} "
+    shell: /bin/sh
+
+- name: "add key"
+  when: user is defined
+  become: yes
+  authorized_key:
+    user: "{{ user }}"
+    state: present
+    key: "{{ lookup('file', '/home/vagrant/.ssh/id_rsa.pub') }}"
+
+#- name: "Change in sudoers"
+#  when: user is defined
+#  become: yes
+#  template: src=/home/vagrant/ngApp/playbook/roles/users/templates/sudoers.j2 dest=/etc/sudoers.d/{{ user }}-sudoer validate="/usr/sbin/visudo -cf %s"

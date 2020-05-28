@@ -1,0 +1,13 @@
+---
+- name: "install nginx"
+  hosts: web
+  vars:
+    user: bob    
+    domains: 
+      - dev.local
+      - demo.fr
+  roles:
+    - common
+    - users
+    - nginx
+

@@ -1,0 +1,11 @@
+---
+# tasks file for playbook/roles/nginx
+- name: "install common"
+  become: yes
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ packages_list }}"
+    
+  
+

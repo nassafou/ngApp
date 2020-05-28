@@ -1,0 +1,7 @@
+---
+# defaults file for playbook/roles/users
+
+# parametre utilisateur
+#user:
+# - bob
+

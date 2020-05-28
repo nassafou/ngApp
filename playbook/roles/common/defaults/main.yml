@@ -1,0 +1,9 @@
+---
+# defaults file for playbook/roles/nginx
+
+# liste des packages
+packages_list:
+  - vim
+  - htop
+  - git
+
